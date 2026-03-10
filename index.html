@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Fernandez | Desarrollador Web</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Tu Public Key ya configurada
+            emailjs.init("9A77efAPKLf6ujaVz");
+        })();
+    </script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">DF<span>.dev</span></div>
+            <ul>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Hola, soy <span>Diego Fernandez</span></h1>
+        <p>Desarrollador web especializado en soluciones interactivas, sistemas de ranking y branding digital.</p>
+        <a href="#contacto" class="btn-primary">Hablemos de tu proyecto</a>
+    </section>
+
+    <section id="proyectos" class="section">
+        <h2>Proyectos Destacados</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Sistemas de Predicción</h3>
+                <p>Plataformas de "prode" con manejo de sesiones, lógica de puntajes y rankings en tiempo real.</p>
+            </div>
+            <div class="card">
+                <h3>Branding & UI</h3>
+                <p>Diseño de logos e identidades visuales para redes sociales y sitios web.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="habilidades" class="section">
+        <h2>Mis Habilidades</h2>
+        <div class="grid">
+            <div class="skill-card">
+                <i class="fab fa-html5"></i>
+                <h3>HTML5</h3>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-css3-alt"></i>
+                <h3>CSS3</h3>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-code-branch"></i>
+                <h3>Lógica & UI</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="section bg-alt">
+        <h2>Mis Servicios</h2>
+        <ul>
+            <li>Desarrollo de sitios web a medida (Frontend & Backend).</li>
+            <li>Optimización de experiencia de usuario (UX) y tiempos de carga.</li>
+            <li>Integración de sistemas de registro y verificación por correo.</li>
+        </ul>
+    </section>
+
+    <section id="contacto" class="section">
+        <h2>Contacto</h2>
+        <p>¿Tenés una idea? Mandame un correo y la hacemos realidad.</p>
+        
+        <form id="contact-form" class="contact-form">
+            <input type="text" name="user_name" id="user_name" placeholder="Tu nombre" required>
+            <input type="email" name="user_email" id="user_email" placeholder="Tu correo electrónico" required>
+            <textarea name="message" id="message" placeholder="¿En qué puedo ayudarte?" rows="5" required></textarea>
+            <button type="submit" id="button" class="btn-primary">Enviar Mensaje</button>
+        </form>
+        
+        <p id="status-message" style="margin-top: 15px; font-weight: bold;"></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Diego Fernandez - Concordia, Entre Ríos.</p>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('button');
+        const statusMsg = document.getElementById('status-message');
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            btn.innerText = 'Enviando...';
+
+            const serviceID = 'service_t6nv46v'; 
+            const templateID = 'template_vvfh053'; 
+
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+                    btn.innerText = 'Enviar Mensaje';
+                    statusMsg.style.color = '#00ff88';
+                    statusMsg.innerText = '¡Mensaje enviado con éxito! Te responderé pronto.';
+                    document.getElementById('contact-form').reset();
+                }, (err) => {
+                    btn.innerText = 'Enviar Mensaje';
+                    statusMsg.style.color = '#ff4d4d';
+                    statusMsg.innerText = 'Ups, algo salió mal. Intentá de nuevo.';
+                    console.log(JSON.stringify(err));
+                });
+        });
+    </script>
+</body>
+</html>
